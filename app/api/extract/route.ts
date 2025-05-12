@@ -1,9 +1,8 @@
 import { NextResponse } from 'next/server';
 import { JSDOM } from 'jsdom';
 import TurndownService from 'turndown';
-import { generateText, streamText } from "ai"
+import { streamText } from "ai"
 import { google } from "@ai-sdk/google"
-import { Construction } from 'lucide-react';
 
 // Initialize turndown for HTML to Markdown conversion
 const turndownService = new TurndownService();

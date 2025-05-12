@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@ai-sdk/google": "^1.2.14",
+    "@ai-sdk/react": "^1.2.12",
     "@google/generative-ai": "^0.2.1",
     "@hookform/resolvers": "^3.10.0",
     "@next/swc-wasm-nodejs": "13.5.1",
