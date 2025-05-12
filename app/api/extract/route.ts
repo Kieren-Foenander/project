@@ -4,7 +4,6 @@ import TurndownService from 'turndown';
 import { streamText } from "ai"
 import { google } from "@ai-sdk/google"
 
-// Initialize turndown for HTML to Markdown conversion
 const turndownService = new TurndownService();
 
 export async function POST(request: Request) {
