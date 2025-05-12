@@ -11,14 +11,32 @@ import { useToast } from '@/hooks/use-toast'
 interface RecipeDisplayProps {
   recipe: string
   sourceUrl: string | null
+  isStreaming: boolean
 }
 
 export default function RecipeDisplay({
   recipe,
   sourceUrl,
+  isStreaming,
 }: RecipeDisplayProps) {
   const [activeTab, setActiveTab] = useState('recipe')
   const { toast } = useToast()
+
+  const modifiedRecipe = (recipe: string) => {
+    const markdownRegex = isStreaming
+      ? /```markdown\s*([\s\S]*)/i
+      : /```markdown\s*([\s\S]*?)```/i
+
+    const match = recipe.match(markdownRegex)
+
+    let markdownContent
+    if (match && match[1] != null) {
+      markdownContent = match[1].trim()
+    } else {
+      markdownContent = recipe.trim()
+    }
+    return markdownContent
+  }
 
   const handlePrint = () => {
     window.print()
@@ -81,7 +99,7 @@ export default function RecipeDisplay({
           </TabsList>
           <TabsContent value="recipe" className="mt-0">
             <div className="prose prose-neutral dark:prose-invert max-w-none">
-              <ReactMarkdown>{recipe}</ReactMarkdown>
+              <ReactMarkdown>{modifiedRecipe(recipe)}</ReactMarkdown>
             </div>
           </TabsContent>
           <TabsContent value="source" className="mt-0">
